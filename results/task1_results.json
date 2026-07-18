@@ -1,0 +1,2373 @@
+{
+  "metadata": {
+    "tabpfn_backend": "local",
+    "random_state": 42,
+    "cv_splits": 3,
+    "tasks": [
+      {
+        "name": "credit-g",
+        "source": "task",
+        "task_id": 31,
+        "dataset_id": 31,
+        "kind": "classification"
+      },
+      {
+        "name": "blood-transfusion",
+        "source": "dataset",
+        "dataset_id": 1464,
+        "target": "Class",
+        "kind": "classification"
+      },
+      {
+        "name": "segment",
+        "source": "dataset",
+        "dataset_id": 36,
+        "target": "class",
+        "kind": "classification",
+        "requested_id": 1468
+      },
+      {
+        "name": "phishing_websites",
+        "source": "dataset",
+        "dataset_id": 4534,
+        "target": "Result",
+        "kind": "classification",
+        "requested_id": 1496
+      },
+      {
+        "name": "optdigits",
+        "source": "dataset",
+        "dataset_id": 28,
+        "target": "class",
+        "kind": "classification",
+        "replaces": "fashion-mnist"
+      },
+      {
+        "name": "cpu_act",
+        "source": "dataset",
+        "dataset_id": 197,
+        "target": "usr",
+        "kind": "regression",
+        "requested_id": 361099
+      },
+      {
+        "name": "abalone",
+        "source": "dataset",
+        "dataset_id": 42726,
+        "target": "Class_number_of_rings",
+        "kind": "regression",
+        "requested_id": 361077
+      },
+      {
+        "name": "houses",
+        "source": "dataset",
+        "dataset_id": 537,
+        "target": "median_house_value",
+        "kind": "regression",
+        "requested_id": 361089
+      },
+      {
+        "name": "pol",
+        "source": "dataset",
+        "dataset_id": 201,
+        "target": "foo",
+        "kind": "regression",
+        "requested_id": 361110
+      },
+      {
+        "name": "elevators",
+        "source": "dataset",
+        "dataset_id": 216,
+        "target": "Goal",
+        "kind": "regression",
+        "requested_id": 361084
+      }
+    ]
+  },
+  "task_results": [
+    {
+      "metadata": {
+        "name": "credit-g",
+        "source": "task",
+        "task_id": 31,
+        "dataset_id": 31,
+        "kind": "classification",
+        "openml_task_id": 31,
+        "openml_dataset_id": 31,
+        "openml_dataset_name": "credit-g",
+        "target_name": "class",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 1000,
+        "n_features": 20,
+        "categorical_columns": [
+          "checking_status",
+          "credit_history",
+          "purpose",
+          "savings_status",
+          "employment",
+          "personal_status",
+          "other_parties",
+          "property_magnitude",
+          "other_payment_plans",
+          "housing",
+          "job",
+          "own_telephone",
+          "foreign_worker"
+        ],
+        "numeric_columns": [
+          "duration",
+          "credit_amount",
+          "installment_commitment",
+          "residence_since",
+          "age",
+          "existing_credits",
+          "num_dependents"
+        ],
+        "target_classes": [
+          "bad",
+          "good"
+        ]
+      },
+      "tabpfn_train_test": {
+        "roc_auc": 0.7783333333333332,
+        "log_loss": 0.5061478614807129,
+        "train_latency_seconds": 0.8097605410730466,
+        "predict_latency_seconds": 4.838043499970809,
+        "end_to_end_latency_seconds": 5.647804333013482,
+        "train_rows": 800,
+        "test_rows": 200
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "roc_auc_mean": 0.7985699962094811,
+          "log_loss_mean": 0.48859240611394245,
+          "log_loss_std": 0.022752845039460127,
+          "train_latency_mean_seconds": 0.38778265317281085,
+          "predict_score_latency_mean_seconds": 2.7538256645202637,
+          "end_to_end_cv_latency_seconds": 9.424824953079224
+        },
+        {
+          "model": "RandomForest",
+          "roc_auc_mean": 0.7810510130467212,
+          "log_loss_mean": 0.5041263236798011,
+          "log_loss_std": 0.01327717199851776,
+          "train_latency_mean_seconds": 0.08916544914245605,
+          "predict_score_latency_mean_seconds": 0.009085257848103842,
+          "end_to_end_cv_latency_seconds": 0.2947521209716797
+        },
+        {
+          "model": "XGBoost",
+          "roc_auc_mean": 0.764724025775528,
+          "log_loss_mean": 0.6746745308240255,
+          "log_loss_std": 0.06265109673456512,
+          "train_latency_mean_seconds": 0.02870289484659831,
+          "predict_score_latency_mean_seconds": 0.004189650217692058,
+          "end_to_end_cv_latency_seconds": 0.0986776351928711
+        },
+        {
+          "model": "CatBoost",
+          "roc_auc_mean": 0.7943232089798613,
+          "log_loss_mean": 0.4902077047745956,
+          "log_loss_std": 0.02518735902364692,
+          "train_latency_mean_seconds": 0.5662616888682047,
+          "predict_score_latency_mean_seconds": 0.004974365234375,
+          "end_to_end_cv_latency_seconds": 1.7137081623077393
+        },
+        {
+          "model": "Logistic Regression",
+          "roc_auc_mean": 0.5980125453945196,
+          "log_loss_mean": 0.5975501176763109,
+          "log_loss_std": 0.004984197697148415,
+          "train_latency_mean_seconds": 0.3356429735819499,
+          "predict_score_latency_mean_seconds": 0.0043782393137613935,
+          "end_to_end_cv_latency_seconds": 1.0200636386871338
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.4022331237792969,
+            0.39188098907470703,
+            0.3692338466644287
+          ],
+          "score_time": [
+            2.773646831512451,
+            2.959407091140747,
+            2.5284230709075928
+          ],
+          "roc_auc": [
+            0.7795726495726496,
+            0.7868240343347639,
+            0.8293133047210299
+          ],
+          "log_loss": [
+            0.5130850076675415,
+            0.49441879987716675,
+            0.45827341079711914
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            0.09189510345458984,
+            0.08798909187316895,
+            0.08761215209960938
+          ],
+          "score_time": [
+            0.009185791015625,
+            0.009023904800415039,
+            0.009046077728271484
+          ],
+          "roc_auc": [
+            0.7603418803418803,
+            0.7631759656652362,
+            0.8196351931330472
+          ],
+          "log_loss": [
+            0.5130494685087466,
+            0.5139723736809707,
+            0.4853571288496864
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.03676486015319824,
+            0.025655031204223633,
+            0.023688793182373047
+          ],
+          "score_time": [
+            0.005169868469238281,
+            0.0037949085235595703,
+            0.0036041736602783203
+          ],
+          "roc_auc": [
+            0.747905982905983,
+            0.7493991416309013,
+            0.7968669527896995
+          ],
+          "log_loss": [
+            0.7424266338348389,
+            0.6902452111244202,
+            0.5913517475128174
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            0.6288819313049316,
+            0.5435850620269775,
+            0.5263180732727051
+          ],
+          "score_time": [
+            0.008105278015136719,
+            0.003413677215576172,
+            0.0034041404724121094
+          ],
+          "roc_auc": [
+            0.7680769230769231,
+            0.785236051502146,
+            0.829656652360515
+          ],
+          "log_loss": [
+            0.5171646408028243,
+            0.4968934942934681,
+            0.4565649792274943
+          ]
+        },
+        "Logistic Regression": {
+          "fit_time": [
+            0.25998377799987793,
+            0.4063432216644287,
+            0.34060192108154297
+          ],
+          "score_time": [
+            0.0031261444091796875,
+            0.0069386959075927734,
+            0.0030698776245117188
+          ],
+          "roc_auc": [
+            0.6292307692307694,
+            0.5730901287553649,
+            0.5917167381974249
+          ],
+          "log_loss": [
+            0.5910480525759868,
+            0.6031582039169412,
+            0.5984440965360046
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "blood-transfusion",
+        "source": "dataset",
+        "dataset_id": 1464,
+        "target": "Class",
+        "kind": "classification",
+        "openml_dataset_id": 1464,
+        "openml_dataset_name": "blood-transfusion-service-center",
+        "target_name": "Class",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 748,
+        "n_features": 4,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "V1",
+          "V2",
+          "V3",
+          "V4"
+        ],
+        "target_classes": [
+          "1",
+          "2"
+        ]
+      },
+      "tabpfn_train_test": {
+        "roc_auc": 0.7892300194931775,
+        "log_loss": 0.4609529674053192,
+        "train_latency_seconds": 0.3849953329190612,
+        "predict_latency_seconds": 2.600082500022836,
+        "end_to_end_latency_seconds": 2.985077999997884,
+        "train_rows": 598,
+        "test_rows": 150
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "roc_auc_mean": 0.758521409455843,
+          "log_loss_mean": 0.4676973819732666,
+          "log_loss_std": 0.008599961346212024,
+          "train_latency_mean_seconds": 0.40818031628926593,
+          "predict_score_latency_mean_seconds": 2.043586333592733,
+          "end_to_end_cv_latency_seconds": 7.355299949645996
+        },
+        {
+          "model": "RandomForest",
+          "roc_auc_mean": 0.6865336009515314,
+          "log_loss_mean": 0.9544079603131829,
+          "log_loss_std": 0.12449458567959679,
+          "train_latency_mean_seconds": 0.07058389981587727,
+          "predict_score_latency_mean_seconds": 0.007948637008666992,
+          "end_to_end_cv_latency_seconds": 0.2355976104736328
+        },
+        {
+          "model": "XGBoost",
+          "roc_auc_mean": 0.6955637327782734,
+          "log_loss_mean": 0.6148915489514669,
+          "log_loss_std": 0.034444194024072276,
+          "train_latency_mean_seconds": 0.013986905415852865,
+          "predict_score_latency_mean_seconds": 0.0030478636423746743,
+          "end_to_end_cv_latency_seconds": 0.05110430717468262
+        },
+        {
+          "model": "CatBoost",
+          "roc_auc_mean": 0.7381199821587868,
+          "log_loss_mean": 0.4839168622633765,
+          "log_loss_std": 0.009455053500009905,
+          "train_latency_mean_seconds": 0.36670104662577313,
+          "predict_score_latency_mean_seconds": 0.0031197071075439453,
+          "end_to_end_cv_latency_seconds": 1.1094622611999512
+        },
+        {
+          "model": "Logistic Regression",
+          "roc_auc_mean": 0.7108531569035583,
+          "log_loss_mean": 0.5031475590126399,
+          "log_loss_std": 0.009109011233584525,
+          "train_latency_mean_seconds": 0.14506967862447104,
+          "predict_score_latency_mean_seconds": 0.004752953847249349,
+          "end_to_end_cv_latency_seconds": 0.44946789741516113
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.3526148796081543,
+            0.5204060077667236,
+            0.3515200614929199
+          ],
+          "score_time": [
+            2.1645820140838623,
+            2.1469039916992188,
+            1.8192729949951172
+          ],
+          "roc_auc": [
+            0.775921052631579,
+            0.7362622658340767,
+            0.7633809099018734
+          ],
+          "log_loss": [
+            0.46124064922332764,
+            0.4798516631126404,
+            0.4619998335838318
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            0.07143187522888184,
+            0.07030200958251953,
+            0.07001781463623047
+          ],
+          "score_time": [
+            0.008161067962646484,
+            0.007775783538818359,
+            0.007909059524536133
+          ],
+          "roc_auc": [
+            0.6756578947368422,
+            0.7180196253345228,
+            0.6659232827832292
+          ],
+          "log_loss": [
+            1.0874083455300632,
+            0.7880001806834219,
+            0.9878153547260635
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.014667034149169922,
+            0.012123823165893555,
+            0.015169858932495117
+          ],
+          "score_time": [
+            0.003107786178588867,
+            0.0028548240661621094,
+            0.003180980682373047
+          ],
+          "roc_auc": [
+            0.7115350877192982,
+            0.7134701159678858,
+            0.6616859946476361
+          ],
+          "log_loss": [
+            0.6015270352363586,
+            0.5810072422027588,
+            0.6621403694152832
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            0.3687469959259033,
+            0.367656946182251,
+            0.36369919776916504
+          ],
+          "score_time": [
+            0.002977132797241211,
+            0.0032501220703125,
+            0.003131866455078125
+          ],
+          "roc_auc": [
+            0.7290789473684212,
+            0.7328724353256022,
+            0.7524085637823372
+          ],
+          "log_loss": [
+            0.49144641205078676,
+            0.48972164666105233,
+            0.4705825280782903
+          ]
+        },
+        "Logistic Regression": {
+          "fit_time": [
+            0.14237308502197266,
+            0.15294122695922852,
+            0.13989472389221191
+          ],
+          "score_time": [
+            0.0027589797973632812,
+            0.0029387474060058594,
+            0.008561134338378906
+          ],
+          "roc_auc": [
+            0.7342543859649123,
+            0.6938893844781444,
+            0.7044157002676182
+          ],
+          "log_loss": [
+            0.49120764329618055,
+            0.5133055877863675,
+            0.5049294459553714
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "segment",
+        "source": "dataset",
+        "dataset_id": 36,
+        "target": "class",
+        "kind": "classification",
+        "requested_id": 1468,
+        "openml_dataset_id": 36,
+        "openml_dataset_name": "segment",
+        "target_name": "class",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 2310,
+        "n_features": 19,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "region-centroid-col",
+          "region-centroid-row",
+          "region-pixel-count",
+          "short-line-density-5",
+          "short-line-density-2",
+          "vedge-mean",
+          "vegde-sd",
+          "hedge-mean",
+          "hedge-sd",
+          "intensity-mean",
+          "rawred-mean",
+          "rawblue-mean",
+          "rawgreen-mean",
+          "exred-mean",
+          "exblue-mean",
+          "exgreen-mean",
+          "value-mean",
+          "saturation-mean",
+          "hue-mean"
+        ],
+        "target_classes": [
+          "brickface",
+          "cement",
+          "foliage",
+          "grass",
+          "path",
+          "sky",
+          "window"
+        ]
+      },
+      "tabpfn_train_test": {
+        "roc_auc": 0.9991746469019197,
+        "log_loss": 0.07178449630737305,
+        "train_latency_seconds": 0.355511459056288,
+        "predict_latency_seconds": 6.34719766699709,
+        "end_to_end_latency_seconds": 6.7027092090575024,
+        "train_rows": 1848,
+        "test_rows": 462
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "roc_auc_mean": 0.9996274432638069,
+          "log_loss_mean": 0.04321821220219135,
+          "log_loss_std": 0.011669591105205412,
+          "train_latency_mean_seconds": 0.37986191113789874,
+          "predict_score_latency_mean_seconds": 5.260955969492595,
+          "end_to_end_cv_latency_seconds": 16.92245364189148
+        },
+        {
+          "model": "RandomForest",
+          "roc_auc_mean": 0.9991889675980584,
+          "log_loss_mean": 0.09887816085852995,
+          "log_loss_std": 0.006201237838730448,
+          "train_latency_mean_seconds": 0.19501336415608725,
+          "predict_score_latency_mean_seconds": 0.01310125986735026,
+          "end_to_end_cv_latency_seconds": 0.6243438720703125
+        },
+        {
+          "model": "XGBoost",
+          "roc_auc_mean": 0.9993952512134331,
+          "log_loss_mean": 0.061097597082455955,
+          "log_loss_std": 0.009427043892845292,
+          "train_latency_mean_seconds": 0.1373293399810791,
+          "predict_score_latency_mean_seconds": 0.008638381958007812,
+          "end_to_end_cv_latency_seconds": 0.43790316581726074
+        },
+        {
+          "model": "CatBoost",
+          "roc_auc_mean": 0.9994037780401417,
+          "log_loss_mean": 0.05535367825326474,
+          "log_loss_std": 0.0020794554176748934,
+          "train_latency_mean_seconds": 2.8312082290649414,
+          "predict_score_latency_mean_seconds": 0.007073402404785156,
+          "end_to_end_cv_latency_seconds": 8.51484489440918
+        },
+        {
+          "model": "Logistic Regression",
+          "roc_auc_mean": 0.9905352223534042,
+          "log_loss_mean": 0.2549480494245432,
+          "log_loss_std": 0.0047212588633561235,
+          "train_latency_mean_seconds": 2.9679394563039145,
+          "predict_score_latency_mean_seconds": 0.005668958028157552,
+          "end_to_end_cv_latency_seconds": 8.920825242996216
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.38994312286376953,
+            0.3694648742675781,
+            0.38017773628234863
+          ],
+          "score_time": [
+            5.490625858306885,
+            5.2279839515686035,
+            5.064258098602295
+          ],
+          "roc_auc": [
+            0.99948248720976,
+            0.999844549390004,
+            0.9995552931916567
+          ],
+          "log_loss": [
+            0.058258961886167526,
+            0.029815582558512688,
+            0.041580092161893845
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            0.19726300239562988,
+            0.19631290435791016,
+            0.19146418571472168
+          ],
+          "score_time": [
+            0.013397932052612305,
+            0.01341390609741211,
+            0.012491941452026367
+          ],
+          "roc_auc": [
+            0.9994126328217237,
+            0.9990023612750887,
+            0.9991519086973633
+          ],
+          "log_loss": [
+            0.09313309278444337,
+            0.10748904576641032,
+            0.09601234402473612
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.13944697380065918,
+            0.1360781192779541,
+            0.13646292686462402
+          ],
+          "score_time": [
+            0.008469104766845703,
+            0.008540868759155273,
+            0.008905172348022461
+          ],
+          "roc_auc": [
+            0.9995926800472255,
+            0.9993860684769776,
+            0.9992070051160961
+          ],
+          "log_loss": [
+            0.055308375507593155,
+            0.07439256459474564,
+            0.05359185114502907
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            2.943527936935425,
+            2.7170169353485107,
+            2.8330798149108887
+          ],
+          "score_time": [
+            0.007754087448120117,
+            0.006722211837768555,
+            0.006743907928466797
+          ],
+          "roc_auc": [
+            0.9993644234553326,
+            0.9996713892168437,
+            0.9991755214482488
+          ],
+          "log_loss": [
+            0.058291565660251836,
+            0.05399793984578769,
+            0.053771529253754696
+          ]
+        },
+        "Logistic Regression": {
+          "fit_time": [
+            3.0204641819000244,
+            2.940113067626953,
+            2.9432411193847656
+          ],
+          "score_time": [
+            0.00598907470703125,
+            0.005692005157470703,
+            0.005325794219970703
+          ],
+          "roc_auc": [
+            0.989757969303424,
+            0.9916804407713499,
+            0.9901672569854388
+          ],
+          "log_loss": [
+            0.2570399563347091,
+            0.2484108873600894,
+            0.25939330457883103
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "phishing_websites",
+        "source": "dataset",
+        "dataset_id": 4534,
+        "target": "Result",
+        "kind": "classification",
+        "requested_id": 1496,
+        "openml_dataset_id": 4534,
+        "openml_dataset_name": "PhishingWebsites",
+        "target_name": "Result",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 11055,
+        "n_features": 30,
+        "categorical_columns": [
+          "having_IP_Address",
+          "URL_Length",
+          "Shortining_Service",
+          "having_At_Symbol",
+          "double_slash_redirecting",
+          "Prefix_Suffix",
+          "having_Sub_Domain",
+          "SSLfinal_State",
+          "Domain_registeration_length",
+          "Favicon",
+          "port",
+          "HTTPS_token",
+          "Request_URL",
+          "URL_of_Anchor",
+          "Links_in_tags",
+          "SFH",
+          "Submitting_to_email",
+          "Abnormal_URL",
+          "Redirect",
+          "on_mouseover",
+          "RightClick",
+          "popUpWidnow",
+          "Iframe",
+          "age_of_domain",
+          "DNSRecord",
+          "web_traffic",
+          "Page_Rank",
+          "Google_Index",
+          "Links_pointing_to_page",
+          "Statistical_report"
+        ],
+        "numeric_columns": [],
+        "target_classes": [
+          "-1",
+          "1"
+        ]
+      },
+      "tabpfn_train_test": {
+        "roc_auc": 0.9986306139027503,
+        "log_loss": 0.04762718826532364,
+        "train_latency_seconds": 0.5087621660204604,
+        "predict_latency_seconds": 53.69042291701771,
+        "end_to_end_latency_seconds": 54.19918520806823,
+        "train_rows": 8844,
+        "test_rows": 2211
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "roc_auc_mean": 0.9978707375118575,
+          "log_loss_mean": 0.059714172035455704,
+          "log_loss_std": 0.005930081593423634,
+          "train_latency_mean_seconds": 0.5108976364135742,
+          "predict_score_latency_mean_seconds": 45.42092625300089,
+          "end_to_end_cv_latency_seconds": 137.7954716682434
+        },
+        {
+          "model": "RandomForest",
+          "roc_auc_mean": 0.994508063924545,
+          "log_loss_mean": 0.1160834159853504,
+          "log_loss_std": 0.011541084172415948,
+          "train_latency_mean_seconds": 0.29871567090352374,
+          "predict_score_latency_mean_seconds": 0.03504761060078939,
+          "end_to_end_cv_latency_seconds": 1.0012898445129395
+        },
+        {
+          "model": "XGBoost",
+          "roc_auc_mean": 0.9959551602930273,
+          "log_loss_mean": 0.07851168761650722,
+          "log_loss_std": 0.0021721327570578433,
+          "train_latency_mean_seconds": 0.06211241086324056,
+          "predict_score_latency_mean_seconds": 0.007714907328287761,
+          "end_to_end_cv_latency_seconds": 0.20948195457458496
+        },
+        {
+          "model": "CatBoost",
+          "roc_auc_mean": 0.9964240989324921,
+          "log_loss_mean": 0.07563115553448707,
+          "log_loss_std": 0.002095238219416549,
+          "train_latency_mean_seconds": 2.0905114014943442,
+          "predict_score_latency_mean_seconds": 0.005266269048055013,
+          "end_to_end_cv_latency_seconds": 6.287333011627197
+        },
+        {
+          "model": "Logistic Regression",
+          "roc_auc_mean": 0.9786319524937035,
+          "log_loss_mean": 0.18334932829081543,
+          "log_loss_std": 0.006053039742086577,
+          "train_latency_mean_seconds": 0.0760193665822347,
+          "predict_score_latency_mean_seconds": 0.0038928985595703125,
+          "end_to_end_cv_latency_seconds": 0.23973679542541504
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.5610499382019043,
+            0.5272369384765625,
+            0.44440603256225586
+          ],
+          "score_time": [
+            48.233482837677,
+            43.75116300582886,
+            44.278132915496826
+          ],
+          "roc_auc": [
+            0.9974968038590044,
+            0.9983516447443027,
+            0.9977637639322655
+          ],
+          "log_loss": [
+            0.06662322580814362,
+            0.0521429069340229,
+            0.06037638336420059
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            0.28181886672973633,
+            0.3067972660064697,
+            0.30753087997436523
+          ],
+          "score_time": [
+            0.035108089447021484,
+            0.0352787971496582,
+            0.03475594520568848
+          ],
+          "roc_auc": [
+            0.9946486274200844,
+            0.9949455611540248,
+            0.9939300031995263
+          ],
+          "log_loss": [
+            0.10449371806156271,
+            0.11192567170032117,
+            0.1318308581941673
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.06411981582641602,
+            0.06089019775390625,
+            0.061327219009399414
+          ],
+          "score_time": [
+            0.008060216903686523,
+            0.007605791091918945,
+            0.0074787139892578125
+          ],
+          "roc_auc": [
+            0.9956790919259093,
+            0.9963632332174247,
+            0.9958231557357479
+          ],
+          "log_loss": [
+            0.08020517975091934,
+            0.07544541358947754,
+            0.07988446950912476
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            2.2088000774383545,
+            2.0341579914093018,
+            2.028576135635376
+          ],
+          "score_time": [
+            0.005167961120605469,
+            0.004994869232177734,
+            0.005635976791381836
+          ],
+          "roc_auc": [
+            0.9962544569902678,
+            0.9969042793075088,
+            0.9961135604996992
+          ],
+          "log_loss": [
+            0.07604804610088309,
+            0.07288210274797549,
+            0.07796331775460265
+          ]
+        },
+        "Logistic Regression": {
+          "fit_time": [
+            0.07396912574768066,
+            0.07405900955200195,
+            0.08002996444702148
+          ],
+          "score_time": [
+            0.00409388542175293,
+            0.0038619041442871094,
+            0.0037229061126708984
+          ],
+          "roc_auc": [
+            0.9781680591217446,
+            0.980577400328746,
+            0.97715039803062
+          ],
+          "log_loss": [
+            0.1846974446709449,
+            0.17535434995037757,
+            0.18999619025112383
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "optdigits",
+        "source": "dataset",
+        "dataset_id": 28,
+        "target": "class",
+        "kind": "classification",
+        "replaces": "fashion-mnist",
+        "openml_dataset_id": 28,
+        "openml_dataset_name": "optdigits",
+        "target_name": "class",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 5620,
+        "n_features": 64,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "input1",
+          "input2",
+          "input3",
+          "input4",
+          "input5",
+          "input6",
+          "input7",
+          "input8",
+          "input9",
+          "input10",
+          "input11",
+          "input12",
+          "input13",
+          "input14",
+          "input15",
+          "input16",
+          "input17",
+          "input18",
+          "input19",
+          "input20",
+          "input21",
+          "input22",
+          "input23",
+          "input24",
+          "input25",
+          "input26",
+          "input27",
+          "input28",
+          "input29",
+          "input30",
+          "input31",
+          "input32",
+          "input33",
+          "input34",
+          "input35",
+          "input36",
+          "input37",
+          "input38",
+          "input39",
+          "input40",
+          "input41",
+          "input42",
+          "input43",
+          "input44",
+          "input45",
+          "input46",
+          "input47",
+          "input48",
+          "input49",
+          "input50",
+          "input51",
+          "input52",
+          "input53",
+          "input54",
+          "input55",
+          "input56",
+          "input57",
+          "input58",
+          "input59",
+          "input60",
+          "input61",
+          "input62",
+          "input63",
+          "input64"
+        ],
+        "target_classes": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      },
+      "tabpfn_train_test": {
+        "roc_auc": 0.9999955815808965,
+        "log_loss": 0.01114150695502758,
+        "train_latency_seconds": 0.5380631670122966,
+        "predict_latency_seconds": 46.14395699999295,
+        "end_to_end_latency_seconds": 46.682020292035304,
+        "train_rows": 4496,
+        "test_rows": 1124
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "roc_auc_mean": 0.999973652104832,
+          "log_loss_mean": 0.017734756072362263,
+          "log_loss_std": 0.0005909525870065255,
+          "train_latency_mean_seconds": 0.4832157293955485,
+          "predict_score_latency_mean_seconds": 40.92812999089559,
+          "end_to_end_cv_latency_seconds": 124.23403716087341
+        },
+        {
+          "model": "RandomForest",
+          "roc_auc_mean": 0.9995227879512117,
+          "log_loss_mean": 0.2318382365626953,
+          "log_loss_std": 0.0014499245533158127,
+          "train_latency_mean_seconds": 0.43880748748779297,
+          "predict_score_latency_mean_seconds": 0.027502934137980144,
+          "end_to_end_cv_latency_seconds": 1.3989312648773193
+        },
+        {
+          "model": "XGBoost",
+          "roc_auc_mean": 0.9995661048573533,
+          "log_loss_mean": 0.07429879655440648,
+          "log_loss_std": 0.00980103151489383,
+          "train_latency_mean_seconds": 0.4167068799336751,
+          "predict_score_latency_mean_seconds": 0.020741383234659832,
+          "end_to_end_cv_latency_seconds": 1.3123447895050049
+        },
+        {
+          "model": "CatBoost",
+          "roc_auc_mean": 0.9997735116743924,
+          "log_loss_mean": 0.056795699857090536,
+          "log_loss_std": 0.005794958827465203,
+          "train_latency_mean_seconds": 4.215606768925984,
+          "predict_score_latency_mean_seconds": 0.011404275894165039,
+          "end_to_end_cv_latency_seconds": 12.68103313446045
+        },
+        {
+          "model": "Logistic Regression",
+          "roc_auc_mean": 0.9986818382735109,
+          "log_loss_mean": 0.17981242892294835,
+          "log_loss_std": 0.02975262551348371,
+          "train_latency_mean_seconds": 8.229325532913208,
+          "predict_score_latency_mean_seconds": 0.008887529373168945,
+          "end_to_end_cv_latency_seconds": 24.71463918685913
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.5176582336425781,
+            0.5206537246704102,
+            0.4113352298736572
+          ],
+          "score_time": [
+            41.38008189201355,
+            39.537209272384644,
+            41.867098808288574
+          ],
+          "roc_auc": [
+            0.9999819628224141,
+            0.9999658818014782,
+            0.9999731116906038
+          ],
+          "log_loss": [
+            0.01698431186378002,
+            0.018428510054945946,
+            0.017791446298360825
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            0.4448370933532715,
+            0.4355771541595459,
+            0.4360082149505615
+          ],
+          "score_time": [
+            0.026859045028686523,
+            0.02763080596923828,
+            0.028018951416015625
+          ],
+          "roc_auc": [
+            0.999645886581062,
+            0.9993375088947278,
+            0.9995849683778456
+          ],
+          "log_loss": [
+            0.23021772415298952,
+            0.23156043189473166,
+            0.23373655364036472
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.41420888900756836,
+            0.4300069808959961,
+            0.40590476989746094
+          ],
+          "score_time": [
+            0.02082991600036621,
+            0.021871089935302734,
+            0.019523143768310547
+          ],
+          "roc_auc": [
+            0.9996786627288715,
+            0.999471415178777,
+            0.9995482366644113
+          ],
+          "log_loss": [
+            0.06095961481332779,
+            0.08423028886318207,
+            0.0777064859867096
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            4.15759015083313,
+            4.480880975723267,
+            4.008349180221558
+          ],
+          "score_time": [
+            0.011622905731201172,
+            0.010426044464111328,
+            0.012163877487182617
+          ],
+          "roc_auc": [
+            0.9998423568555976,
+            0.9996593466111141,
+            0.9998188315564654
+          ],
+          "log_loss": [
+            0.050148916100805366,
+            0.06427090109874116,
+            0.05596728237172507
+          ]
+        },
+        "Logistic Regression": {
+          "fit_time": [
+            7.6670448780059814,
+            9.484956741333008,
+            7.535974979400635
+          ],
+          "score_time": [
+            0.009069204330444336,
+            0.009060144424438477,
+            0.008533239364624023
+          ],
+          "roc_auc": [
+            0.9990159365320584,
+            0.998622000202068,
+            0.9984075780864059
+          ],
+          "log_loss": [
+            0.14089598952504423,
+            0.1854156442602864,
+            0.21312565298351446
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "cpu_act",
+        "source": "dataset",
+        "dataset_id": 197,
+        "target": "usr",
+        "kind": "regression",
+        "requested_id": 361099,
+        "openml_dataset_id": 197,
+        "openml_dataset_name": "cpu_act",
+        "target_name": "usr",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 8192,
+        "n_features": 21,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "lread",
+          "lwrite",
+          "scall",
+          "sread",
+          "swrite",
+          "fork",
+          "exec",
+          "rchar",
+          "wchar",
+          "pgout",
+          "ppgout",
+          "pgfree",
+          "pgscan",
+          "atch",
+          "pgin",
+          "ppgin",
+          "pflt",
+          "vflt",
+          "runqsz",
+          "freemem",
+          "freeswap"
+        ]
+      },
+      "tabpfn_train_test": {
+        "rmse": 2.034940242767334,
+        "mae": 1.41362726688385,
+        "r2": 0.9861810803413391,
+        "train_latency_seconds": 1.239746249979362,
+        "predict_latency_seconds": 60.59332054108381,
+        "end_to_end_latency_seconds": 61.83306687499862,
+        "train_rows": 6553,
+        "test_rows": 1639
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "rmse_mean": 1.9728185733159382,
+          "mae_mean": 1.3916649023691814,
+          "r2_mean": 0.9883209069569906,
+          "train_latency_mean_seconds": 0.6309266885121664,
+          "predict_score_latency_mean_seconds": 68.971706310908,
+          "end_to_end_cv_latency_seconds": 208.8078989982605
+        },
+        {
+          "model": "RandomForest",
+          "rmse_mean": 2.4937497859756004,
+          "mae_mean": 1.721400853672549,
+          "r2_mean": 0.9813922936874812,
+          "train_latency_mean_seconds": 3.783092975616455,
+          "predict_score_latency_mean_seconds": 0.04274741808573405,
+          "end_to_end_cv_latency_seconds": 11.477521181106567
+        },
+        {
+          "model": "XGBoost",
+          "rmse_mean": 2.4598573048909507,
+          "mae_mean": 1.6891156037648518,
+          "r2_mean": 0.9818805257479349,
+          "train_latency_mean_seconds": 0.23803861935933432,
+          "predict_score_latency_mean_seconds": 0.004941304524739583,
+          "end_to_end_cv_latency_seconds": 0.7289397716522217
+        },
+        {
+          "model": "CatBoost",
+          "rmse_mean": 2.268979264647699,
+          "mae_mean": 1.5811599487882815,
+          "r2_mean": 0.9845769249925063,
+          "train_latency_mean_seconds": 1.1158695220947266,
+          "predict_score_latency_mean_seconds": 0.0029175281524658203,
+          "end_to_end_cv_latency_seconds": 3.356361150741577
+        },
+        {
+          "model": "Ridge Regression",
+          "rmse_mean": 9.691862018804843,
+          "mae_mean": 6.072748489050945,
+          "r2_mean": 0.7212788828938551,
+          "train_latency_mean_seconds": 0.0032706260681152344,
+          "predict_score_latency_mean_seconds": 0.0010863939921061199,
+          "end_to_end_cv_latency_seconds": 0.013071060180664062
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.6091840267181396,
+            0.5643148422241211,
+            0.7192811965942383
+          ],
+          "score_time": [
+            72.3485279083252,
+            66.56949925422668,
+            67.99709177017212
+          ],
+          "rmse": [
+            2.0166332721710205,
+            1.9771268367767334,
+            1.924695611000061
+          ],
+          "mae": [
+            1.4065054655075073,
+            1.3956472873687744,
+            1.3728419542312622
+          ],
+          "r2": [
+            0.9859864115715027,
+            0.989147424697876,
+            0.989828884601593
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            3.8321449756622314,
+            3.701345920562744,
+            3.8157880306243896
+          ],
+          "score_time": [
+            0.04236626625061035,
+            0.04188990592956543,
+            0.04398608207702637
+          ],
+          "rmse": [
+            2.4592234338248837,
+            2.671394927840259,
+            2.350630996261659
+          ],
+          "mae": [
+            1.7354558769681434,
+            1.7615525448553644,
+            1.667194139194139
+          ],
+          "r2": [
+            0.979160317809359,
+            0.9801875044410857,
+            0.9848290588119987
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.23811006546020508,
+            0.239973783493042,
+            0.23603200912475586
+          ],
+          "score_time": [
+            0.005148887634277344,
+            0.0049321651458740234,
+            0.004742860794067383
+          ],
+          "rmse": [
+            2.367732286453247,
+            2.7494454383850098,
+            2.2623941898345947
+          ],
+          "mae": [
+            1.6985286474227905,
+            1.738053798675537,
+            1.630764365196228
+          ],
+          "r2": [
+            0.9806820750236511,
+            0.9790128469467163,
+            0.9859466552734375
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            1.1201977729797363,
+            1.1066181659698486,
+            1.1207926273345947
+          ],
+          "score_time": [
+            0.0029082298278808594,
+            0.0025200843811035156,
+            0.003324270248413086
+          ],
+          "rmse": [
+            2.2900785206925027,
+            2.3243143048499597,
+            2.192544968400635
+          ],
+          "mae": [
+            1.5593045807431587,
+            1.6104039798769256,
+            1.5737712857447599
+          ],
+          "r2": [
+            0.9819284309576088,
+            0.985001331784385,
+            0.9868010122355249
+          ]
+        },
+        "Ridge Regression": {
+          "fit_time": [
+            0.00681614875793457,
+            0.0015988349914550781,
+            0.0013968944549560547
+          ],
+          "score_time": [
+            0.0012869834899902344,
+            0.0010020732879638672,
+            0.0009701251983642578
+          ],
+          "rmse": [
+            9.09791288120258,
+            9.916801496524133,
+            10.060871678687814
+          ],
+          "mae": [
+            6.120089726770667,
+            6.182852351721757,
+            5.915303388660411
+          ],
+          "r2": [
+            0.7147808625336475,
+            0.7269726031855235,
+            0.7220831829623939
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "abalone",
+        "source": "dataset",
+        "dataset_id": 42726,
+        "target": "Class_number_of_rings",
+        "kind": "regression",
+        "requested_id": 361077,
+        "openml_dataset_id": 42726,
+        "openml_dataset_name": "abalone",
+        "target_name": "Class_number_of_rings",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 4177,
+        "n_features": 8,
+        "categorical_columns": [
+          "Sex"
+        ],
+        "numeric_columns": [
+          "Length",
+          "Diameter",
+          "Height",
+          "Whole_weight",
+          "Shucked_weight",
+          "Viscera_weight",
+          "Shell_weight"
+        ]
+      },
+      "tabpfn_train_test": {
+        "rmse": 2.072126865386963,
+        "mae": 1.44022798538208,
+        "r2": 0.6033600568771362,
+        "train_latency_seconds": 0.6779520839918405,
+        "predict_latency_seconds": 20.93216287496034,
+        "end_to_end_latency_seconds": 21.610115249990486,
+        "train_rows": 3341,
+        "test_rows": 836
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "rmse_mean": 2.031469782193502,
+          "mae_mean": 1.4228254159291585,
+          "r2_mean": 0.6020784775416056,
+          "train_latency_mean_seconds": 0.4386467933654785,
+          "predict_score_latency_mean_seconds": 25.05879219373067,
+          "end_to_end_cv_latency_seconds": 76.49231696128845
+        },
+        {
+          "model": "RandomForest",
+          "rmse_mean": 2.1932689296619237,
+          "mae_mean": 1.5563300698896787,
+          "r2_mean": 0.5357113346785402,
+          "train_latency_mean_seconds": 0.7158999443054199,
+          "predict_score_latency_mean_seconds": 0.021824359893798828,
+          "end_to_end_cv_latency_seconds": 2.2131729125976562
+        },
+        {
+          "model": "XGBoost",
+          "rmse_mean": 2.332998275756836,
+          "mae_mean": 1.655465006828308,
+          "r2_mean": 0.4745898445447286,
+          "train_latency_mean_seconds": 0.05515782038370768,
+          "predict_score_latency_mean_seconds": 0.003249009450276693,
+          "end_to_end_cv_latency_seconds": 0.17522048950195312
+        },
+        {
+          "model": "CatBoost",
+          "rmse_mean": 2.201600669364014,
+          "mae_mean": 1.5550954278912055,
+          "r2_mean": 0.5326265079326972,
+          "train_latency_mean_seconds": 0.6582999229431152,
+          "predict_score_latency_mean_seconds": 0.0020624001820882163,
+          "end_to_end_cv_latency_seconds": 1.9810869693756104
+        },
+        {
+          "model": "Ridge Regression",
+          "rmse_mean": 2.229959963052521,
+          "mae_mean": 1.6216160541334814,
+          "r2_mean": 0.5207436179880641,
+          "train_latency_mean_seconds": 0.0010450681050618489,
+          "predict_score_latency_mean_seconds": 0.0009632905324300131,
+          "end_to_end_cv_latency_seconds": 0.006025075912475586
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.39743709564208984,
+            0.5102641582489014,
+            0.40823912620544434
+          ],
+          "score_time": [
+            25.290180921554565,
+            25.5030198097229,
+            24.38317584991455
+          ],
+          "rmse": [
+            2.0417606830596924,
+            2.1075246334075928,
+            1.9451240301132202
+          ],
+          "mae": [
+            1.4385594129562378,
+            1.4625928401947021,
+            1.3673239946365356
+          ],
+          "r2": [
+            0.588518500328064,
+            0.6069046258926392,
+            0.6108123064041138
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            0.7301409244537354,
+            0.7044458389282227,
+            0.7131130695343018
+          ],
+          "score_time": [
+            0.021865129470825195,
+            0.02193593978881836,
+            0.02167201042175293
+          ],
+          "rmse": [
+            2.1993529362335567,
+            2.238438976546856,
+            2.1420148762053586
+          ],
+          "mae": [
+            1.5656281407035177,
+            1.572931034482759,
+            1.5304310344827587
+          ],
+          "r2": [
+            0.5225471034598596,
+            0.556551590247921,
+            0.5280353103278398
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.05528593063354492,
+            0.05430769920349121,
+            0.055879831314086914
+          ],
+          "score_time": [
+            0.0034329891204833984,
+            0.003256082534790039,
+            0.0030579566955566406
+          ],
+          "rmse": [
+            2.341088056564331,
+            2.375880479812622,
+            2.2820262908935547
+          ],
+          "mae": [
+            1.6630911827087402,
+            1.6704318523406982,
+            1.6328719854354858
+          ],
+          "r2": [
+            0.4590262770652771,
+            0.500423789024353,
+            0.46431946754455566
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            0.6778898239135742,
+            0.6598210334777832,
+            0.6371889114379883
+          ],
+          "score_time": [
+            0.0019989013671875,
+            0.0020122528076171875,
+            0.002176046371459961
+          ],
+          "rmse": [
+            2.204574687190102,
+            2.2825787670695816,
+            2.1176485538323586
+          ],
+          "mae": [
+            1.5756101424723308,
+            1.58806338327665,
+            1.5016127579246354
+          ],
+          "r2": [
+            0.5202772542587711,
+            0.5388904368578475,
+            0.5387118326814729
+          ]
+        },
+        "Ridge Regression": {
+          "fit_time": [
+            0.0014002323150634766,
+            0.0009012222290039062,
+            0.0008337497711181641
+          ],
+          "score_time": [
+            0.001035928726196289,
+            0.0009407997131347656,
+            0.0009131431579589844
+          ],
+          "rmse": [
+            2.2250001132177664,
+            2.336981652976475,
+            2.127898122963321
+          ],
+          "mae": [
+            1.6394106729101483,
+            1.6824880269427078,
+            1.5429494625475884
+          ],
+          "r2": [
+            0.511346794021009,
+            0.51664836839594,
+            0.5342356915472432
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "houses",
+        "source": "dataset",
+        "dataset_id": 537,
+        "target": "median_house_value",
+        "kind": "regression",
+        "requested_id": 361089,
+        "openml_dataset_id": 537,
+        "openml_dataset_name": "houses",
+        "target_name": "median_house_value",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 20640,
+        "n_features": 8,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "median_income",
+          "housing_median_age",
+          "total_rooms",
+          "total_bedrooms",
+          "population",
+          "households",
+          "latitude",
+          "longitude"
+        ]
+      },
+      "tabpfn_train_test": {
+        "rmse": 38428.644082399915,
+        "mae": 23465.045183048693,
+        "r2": 0.8873053595836788,
+        "train_latency_seconds": 0.862609792035073,
+        "predict_latency_seconds": 139.30736924998928,
+        "end_to_end_latency_seconds": 140.16997908300254,
+        "train_rows": 16512,
+        "test_rows": 4128
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "rmse_mean": 39417.24074656808,
+          "mae_mean": 23730.94313794513,
+          "r2_mean": 0.8832856865967523,
+          "train_latency_mean_seconds": 0.7048507531483968,
+          "predict_score_latency_mean_seconds": 166.1514472166697,
+          "end_to_end_cv_latency_seconds": 500.56889390945435
+        },
+        {
+          "model": "RandomForest",
+          "rmse_mean": 49391.58536822632,
+          "mae_mean": 32316.846177325584,
+          "r2_mean": 0.8167401579147828,
+          "train_latency_mean_seconds": 5.455906391143799,
+          "predict_score_latency_mean_seconds": 0.10677520434061687,
+          "end_to_end_cv_latency_seconds": 16.688044786453247
+        },
+        {
+          "model": "XGBoost",
+          "rmse_mean": 48150.994169512436,
+          "mae_mean": 32062.115537445305,
+          "r2_mean": 0.8258686952535065,
+          "train_latency_mean_seconds": 0.13396334648132324,
+          "predict_score_latency_mean_seconds": 0.008119503657023111,
+          "end_to_end_cv_latency_seconds": 0.42624855041503906
+        },
+        {
+          "model": "CatBoost",
+          "rmse_mean": 45989.703115481876,
+          "mae_mean": 30593.511440581206,
+          "r2_mean": 0.841129532707706,
+          "train_latency_mean_seconds": 1.1715243657430012,
+          "predict_score_latency_mean_seconds": 0.003359635670979818,
+          "end_to_end_cv_latency_seconds": 3.5246520042419434
+        },
+        {
+          "model": "Ridge Regression",
+          "rmse_mean": 69615.5693426761,
+          "mae_mean": 50812.88875217476,
+          "r2_mean": 0.6359598320653733,
+          "train_latency_mean_seconds": 0.001496712366739909,
+          "predict_score_latency_mean_seconds": 0.001279274622599284,
+          "end_to_end_cv_latency_seconds": 0.008327960968017578
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.5222320556640625,
+            0.7789981365203857,
+            0.8133220672607422
+          ],
+          "score_time": [
+            168.1966097354889,
+            165.5174777507782,
+            164.74025416374207
+          ],
+          "rmse": [
+            38767.521532431245,
+            40174.411659145466,
+            39309.789048127524
+          ],
+          "mae": [
+            23600.071532067588,
+            23680.2641135992,
+            23912.493768168606
+          ],
+          "r2": [
+            0.8872504152870246,
+            0.8789876961644838,
+            0.8836189483387485
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            5.501357078552246,
+            5.465208053588867,
+            5.401154041290283
+          ],
+          "score_time": [
+            0.1089937686920166,
+            0.10823297500610352,
+            0.10309886932373047
+          ],
+          "rmse": [
+            50484.76422901551,
+            48796.50920706883,
+            48893.4826685946
+          ],
+          "mae": [
+            32982.41994476744,
+            31747.072569767442,
+            32221.046017441862
+          ],
+          "r2": [
+            0.80879486911863,
+            0.8214713225665069,
+            0.8199542820592117
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.13493609428405762,
+            0.13303923606872559,
+            0.13391470909118652
+          ],
+          "score_time": [
+            0.008197784423828125,
+            0.008142709732055664,
+            0.008018016815185547
+          ],
+          "rmse": [
+            48222.97839786969,
+            48396.70783721538,
+            47833.29627345222
+          ],
+          "mae": [
+            32140.979539596203,
+            32087.64562129531,
+            31957.721451444406
+          ],
+          "r2": [
+            0.8255435873561503,
+            0.8243847936596314,
+            0.8276777047447379
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            1.2096939086914062,
+            1.1592321395874023,
+            1.1456470489501953
+          ],
+          "score_time": [
+            0.003506898880004883,
+            0.003262042999267578,
+            0.003309965133666992
+          ],
+          "rmse": [
+            46038.10224973372,
+            45410.0243785937,
+            46520.98271811821
+          ],
+          "mae": [
+            30757.669477068615,
+            29910.483242433264,
+            31112.38160224173
+          ],
+          "r2": [
+            0.840993930003123,
+            0.8453912928890821,
+            0.8370033752309128
+          ]
+        },
+        "Ridge Regression": {
+          "fit_time": [
+            0.0018699169158935547,
+            0.0014259815216064453,
+            0.0011942386627197266
+          ],
+          "score_time": [
+            0.0018169879913330078,
+            0.0010349750518798828,
+            0.000985860824584961
+          ],
+          "rmse": [
+            69520.03224646971,
+            68717.13780897229,
+            70609.5379725863
+          ],
+          "mae": [
+            50864.56885747732,
+            50384.828368785005,
+            51189.26903026193
+          ],
+          "r2": [
+            0.6374242056277966,
+            0.6459532578395802,
+            0.6245020327287434
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "pol",
+        "source": "dataset",
+        "dataset_id": 201,
+        "target": "foo",
+        "kind": "regression",
+        "requested_id": 361110,
+        "openml_dataset_id": 201,
+        "openml_dataset_name": "pol",
+        "target_name": "foo",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 15000,
+        "n_features": 48,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "f1",
+          "f2",
+          "f3",
+          "f4",
+          "f5",
+          "f6",
+          "f7",
+          "f8",
+          "f9",
+          "f10",
+          "f11",
+          "f12",
+          "f13",
+          "f14",
+          "f15",
+          "f16",
+          "f17",
+          "f18",
+          "f19",
+          "f20",
+          "f21",
+          "f22",
+          "f23",
+          "f24",
+          "f25",
+          "f26",
+          "f27",
+          "f28",
+          "f29",
+          "f30",
+          "f31",
+          "f32",
+          "f33",
+          "f34",
+          "f35",
+          "f36",
+          "f37",
+          "f38",
+          "f39",
+          "f40",
+          "f41",
+          "f42",
+          "f43",
+          "f44",
+          "f45",
+          "f46",
+          "f47",
+          "f48"
+        ]
+      },
+      "tabpfn_train_test": {
+        "rmse": 2.205808401107788,
+        "mae": 0.847824215888977,
+        "r2": 0.9971389770507812,
+        "train_latency_seconds": 0.891075958032161,
+        "predict_latency_seconds": 133.2429925419856,
+        "end_to_end_latency_seconds": 134.13406854204368,
+        "train_rows": 12000,
+        "test_rows": 3000
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "rmse_mean": 2.350597937901815,
+          "mae_mean": 0.9112379948298136,
+          "r2_mean": 0.9968251983324686,
+          "train_latency_mean_seconds": 0.5484025478363037,
+          "predict_score_latency_mean_seconds": 146.1109934647878,
+          "end_to_end_cv_latency_seconds": 439.9781880378723
+        },
+        {
+          "model": "RandomForest",
+          "rmse_mean": 4.867779466594676,
+          "mae_mean": 1.7690333333333335,
+          "r2_mean": 0.9863412377036399,
+          "train_latency_mean_seconds": 2.6121816635131836,
+          "predict_score_latency_mean_seconds": 0.033492644627889,
+          "end_to_end_cv_latency_seconds": 7.937022924423218
+        },
+        {
+          "model": "XGBoost",
+          "rmse_mean": 5.28958257039388,
+          "mae_mean": 2.5123786131540933,
+          "r2_mean": 0.9838654398918152,
+          "train_latency_mean_seconds": 0.16532437006632486,
+          "predict_score_latency_mean_seconds": 0.007970968882242838,
+          "end_to_end_cv_latency_seconds": 0.5198860168457031
+        },
+        {
+          "model": "CatBoost",
+          "rmse_mean": 4.96596301054183,
+          "mae_mean": 2.7004684156134124,
+          "r2_mean": 0.9858280353680021,
+          "train_latency_mean_seconds": 1.1462550163269043,
+          "predict_score_latency_mean_seconds": 0.003619988759358724,
+          "end_to_end_cv_latency_seconds": 3.449625015258789
+        },
+        {
+          "model": "Ridge Regression",
+          "rmse_mean": 30.49575125929942,
+          "mae_mean": 26.594850458047603,
+          "r2_mean": 0.46574771871698983,
+          "train_latency_mean_seconds": 0.004145622253417969,
+          "predict_score_latency_mean_seconds": 0.0013915697733561199,
+          "end_to_end_cv_latency_seconds": 0.016611576080322266
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.5693008899688721,
+            0.5632929801940918,
+            0.5126137733459473
+          ],
+          "score_time": [
+            147.3821382522583,
+            146.80489897727966,
+            144.14594316482544
+          ],
+          "rmse": [
+            2.2830069065093994,
+            2.382974147796631,
+            2.385812759399414
+          ],
+          "mae": [
+            0.8620908260345459,
+            0.9449568390846252,
+            0.9266663193702698
+          ],
+          "r2": [
+            0.9969862103462219,
+            0.9967395663261414,
+            0.9967498183250427
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            2.7139079570770264,
+            2.6112401485443115,
+            2.511396884918213
+          ],
+          "score_time": [
+            0.03386378288269043,
+            0.03284406661987305,
+            0.033770084381103516
+          ],
+          "rmse": [
+            4.737973617486699,
+            5.259724327376864,
+            4.605640454920466
+          ],
+          "mae": [
+            1.71702,
+            1.8605200000000002,
+            1.7295599999999998
+          ],
+          "r2": [
+            0.9870198287093387,
+            0.9841159280634556,
+            0.9878879563381257
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.168471097946167,
+            0.1623539924621582,
+            0.16514801979064941
+          ],
+          "score_time": [
+            0.008118867874145508,
+            0.007925987243652344,
+            0.007868051528930664
+          ],
+          "rmse": [
+            4.945682525634766,
+            5.745494365692139,
+            5.177570819854736
+          ],
+          "mae": [
+            2.3741238117218018,
+            2.6296846866607666,
+            2.533327341079712
+          ],
+          "r2": [
+            0.985856831073761,
+            0.9810464382171631,
+            0.9846930503845215
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            1.1707890033721924,
+            1.111321210861206,
+            1.1566548347473145
+          ],
+          "score_time": [
+            0.003809213638305664,
+            0.003329753875732422,
+            0.003720998764038086
+          ],
+          "rmse": [
+            5.0692070744238835,
+            4.93021346665026,
+            4.8984684905513465
+          ],
+          "mae": [
+            2.757861603704699,
+            2.654099214893737,
+            2.6894444282418
+          ],
+          "r2": [
+            0.9851414916742376,
+            0.9860437954060639,
+            0.9862988190237051
+          ]
+        },
+        "Ridge Regression": {
+          "fit_time": [
+            0.006111860275268555,
+            0.0031337738037109375,
+            0.003191232681274414
+          ],
+          "score_time": [
+            0.0016450881958007812,
+            0.0012218952178955078,
+            0.0013077259063720703
+          ],
+          "rmse": [
+            30.343476192381686,
+            30.25472284634026,
+            30.88905473917632
+          ],
+          "mae": [
+            26.47555230094188,
+            26.260331962068484,
+            27.048667111132445
+          ],
+          "r2": [
+            0.4676149974203204,
+            0.47444007989932546,
+            0.45518807883132373
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "elevators",
+        "source": "dataset",
+        "dataset_id": 216,
+        "target": "Goal",
+        "kind": "regression",
+        "requested_id": 361084,
+        "openml_dataset_id": 216,
+        "openml_dataset_name": "elevators",
+        "target_name": "Goal",
+        "random_state": 42,
+        "cv_splits": 3,
+        "n_rows": 16599,
+        "n_features": 18,
+        "categorical_columns": [],
+        "numeric_columns": [
+          "climbRate",
+          "Sgz",
+          "p",
+          "q",
+          "curRoll",
+          "absRoll",
+          "diffClb",
+          "diffRollRate",
+          "diffDiffClb",
+          "SaTime1",
+          "SaTime2",
+          "SaTime3",
+          "SaTime4",
+          "diffSaTime1",
+          "diffSaTime2",
+          "diffSaTime3",
+          "diffSaTime4",
+          "Sa"
+        ]
+      },
+      "tabpfn_train_test": {
+        "rmse": 0.0017477242543631317,
+        "mae": 0.001298236804774188,
+        "r2": 0.9281048952299902,
+        "train_latency_seconds": 0.6745650839293376,
+        "predict_latency_seconds": 135.37096674996428,
+        "end_to_end_latency_seconds": 136.04553212493192,
+        "train_rows": 13279,
+        "test_rows": 3320
+      },
+      "cross_validation_summary": [
+        {
+          "model": "TabPFN",
+          "rmse_mean": 0.001757819620899362,
+          "mae_mean": 0.0013012829466314839,
+          "r2_mean": 0.931475650648621,
+          "train_latency_mean_seconds": 0.6470279693603516,
+          "predict_score_latency_mean_seconds": 147.7618985970815,
+          "end_to_end_cv_latency_seconds": 445.22677969932556
+        },
+        {
+          "model": "RandomForest",
+          "rmse_mean": 0.0028013433993401356,
+          "mae_mean": 0.0019228248689680079,
+          "r2_mean": 0.8260511066038235,
+          "train_latency_mean_seconds": 5.091849406560262,
+          "predict_score_latency_mean_seconds": 0.11025126775105794,
+          "end_to_end_cv_latency_seconds": 15.60630202293396
+        },
+        {
+          "model": "XGBoost",
+          "rmse_mean": 0.0023309824973564556,
+          "mae_mean": 0.0016811781831009825,
+          "r2_mean": 0.8795140738729718,
+          "train_latency_mean_seconds": 0.12985634803771973,
+          "predict_score_latency_mean_seconds": 0.007506132125854492,
+          "end_to_end_cv_latency_seconds": 0.41208744049072266
+        },
+        {
+          "model": "CatBoost",
+          "rmse_mean": 0.0020564155606348773,
+          "mae_mean": 0.0015063712121605218,
+          "r2_mean": 0.9062327127509361,
+          "train_latency_mean_seconds": 1.193525234858195,
+          "predict_score_latency_mean_seconds": 0.003414630889892578,
+          "end_to_end_cv_latency_seconds": 3.5908195972442627
+        },
+        {
+          "model": "Ridge Regression",
+          "rmse_mean": 0.005923565581699871,
+          "mae_mean": 0.0038562148109034925,
+          "r2_mean": 0.22220680799674464,
+          "train_latency_mean_seconds": 0.0021189053853352866,
+          "predict_score_latency_mean_seconds": 0.0013823509216308594,
+          "end_to_end_cv_latency_seconds": 0.010503768920898438
+        }
+      ],
+      "cross_validation_per_split": {
+        "TabPFN": {
+          "fit_time": [
+            0.5621447563171387,
+            0.7988221645355225,
+            0.5801169872283936
+          ],
+          "score_time": [
+            153.29139184951782,
+            145.38938307762146,
+            144.60492086410522
+          ],
+          "rmse": [
+            0.001756564563340161,
+            0.001742055880553293,
+            0.0017748384188046313
+          ],
+          "mae": [
+            0.0013050396666954144,
+            0.0012933043733443852,
+            0.001305504799854652
+          ],
+          "r2": [
+            0.9314861482763173,
+            0.934009328367665,
+            0.9289314753018811
+          ]
+        },
+        "RandomForest": {
+          "fit_time": [
+            5.1146721839904785,
+            5.028719902038574,
+            5.132156133651733
+          ],
+          "score_time": [
+            0.10175299644470215,
+            0.10047507286071777,
+            0.1285257339477539
+          ],
+          "rmse": [
+            0.0028128822835963045,
+            0.0028322174468080616,
+            0.0027589304676160415
+          ],
+          "mae": [
+            0.001925317187782394,
+            0.0019513247786011184,
+            0.0018918326405205114
+          ],
+          "r2": [
+            0.8243074829814837,
+            0.8255738591527507,
+            0.8282719776772358
+          ]
+        },
+        "XGBoost": {
+          "fit_time": [
+            0.13782405853271484,
+            0.1286771297454834,
+            0.12306785583496094
+          ],
+          "score_time": [
+            0.008000612258911133,
+            0.007202625274658203,
+            0.007315158843994141
+          ],
+          "rmse": [
+            0.002367557411335623,
+            0.0023080877822643873,
+            0.0023173022984693563
+          ],
+          "mae": [
+            0.001705213084982561,
+            0.001665538839204077,
+            0.0016727826251163097
+          ],
+          "r2": [
+            0.8755338696935927,
+            0.8841588050403217,
+            0.8788495468850013
+          ]
+        },
+        "CatBoost": {
+          "fit_time": [
+            1.1991937160491943,
+            1.2273409366607666,
+            1.154041051864624
+          ],
+          "score_time": [
+            0.0035719871520996094,
+            0.003401041030883789,
+            0.003270864486694336
+          ],
+          "rmse": [
+            0.002036566696207181,
+            0.0020587011442374154,
+            0.0020739788414600347
+          ],
+          "mae": [
+            0.0014938041668011678,
+            0.0015032782657436847,
+            0.001522031203936713
+          ],
+          "r2": [
+            0.9079025884575609,
+            0.9078394630324464,
+            0.9029560867628006
+          ]
+        },
+        "Ridge Regression": {
+          "fit_time": [
+            0.0022687911987304688,
+            0.0022377967834472656,
+            0.001850128173828125
+          ],
+          "score_time": [
+            0.0016460418701171875,
+            0.001093149185180664,
+            0.0014078617095947266
+          ],
+          "rmse": [
+            0.005920062684539472,
+            0.006088597198785675,
+            0.005762036861774465
+          ],
+          "mae": [
+            0.0038502237291858136,
+            0.003922718396984239,
+            0.0037957023065404247
+          ],
+          "r2": [
+            0.22177933354446155,
+            0.19389266723204257,
+            0.2509484232137298
+          ]
+        }
+      }
+    }
+  ]
+}
