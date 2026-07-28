@@ -2698,6 +2698,23 @@ wheels = [
 ]
 
 [[package]]
+name = "tabpfn-extensions"
+version = "0.4.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pandas" },
+    { name = "scikit-learn" },
+    { name = "scipy" },
+    { name = "tabpfn" },
+    { name = "tabpfn-common-utils" },
+    { name = "torch" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/71/0b/724737cd17eaee4929639290170569efa59366424a4dbabeec7140749996/tabpfn_extensions-0.4.2.tar.gz", hash = "sha256:801548abba76b2b879f06fd8fc4b5e429f0bbc6dc12e3cb7f1f21e6146517829", size = 117035, upload-time = "2026-06-02T09:39:36.569Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a7/16/7d7fc616af1a5fe20e06ce747f435210b1c3fb666fec136d17eccf646018/tabpfn_extensions-0.4.2-py3-none-any.whl", hash = "sha256:d1166b6f4d3af871429841bc0d3acc6663cf6419e780e6a2c8ae7546cf0aa894", size = 103158, upload-time = "2026-06-02T09:39:35.234Z" },
+]
+
+[[package]]
 name = "tabpfn-project"
 version = "0.1.0"
 source = { virtual = "." }
@@ -2712,6 +2729,7 @@ dependencies = [
     { name = "scikit-learn" },
     { name = "tabpfn" },
     { name = "tabpfn-client" },
+    { name = "tabpfn-extensions" },
     { name = "torch" },
     { name = "xgboost" },
 ]
@@ -2734,6 +2752,7 @@ requires-dist = [
     { name = "scikit-learn", specifier = ">=1.9.0" },
     { name = "tabpfn", specifier = ">=8.0.8" },
     { name = "tabpfn-client", specifier = ">=0.3.2" },
+    { name = "tabpfn-extensions", specifier = ">=0.4.2" },
     { name = "torch", specifier = ">=2.12.1" },
     { name = "xgboost", specifier = ">=3.3.0" },
 ]
