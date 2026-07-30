@@ -15,6 +15,7 @@ dependencies = [
     "scikit-learn>=1.9.0",
     "tabpfn>=8.0.8",
     "tabpfn-client>=0.3.2",
+    "tabpfn-extensions>=0.4.2",
     "torch>=2.12.1",
     "xgboost>=3.3.0",
 ]
