@@ -21,12 +21,12 @@ os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score, log_loss, roc_auc_score
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
 from src.dataset import TASKS, load_openml_data
 from src.plot import plot_context_summary
-from src.metrics import normalize_probabilities
+from src.metrics import classification_metrics, normalize_probabilities
 from src.utils import get_task_config
 from src.utils import json_ready
 
@@ -134,14 +134,15 @@ def run_context_size_experiment(
             y_pred = model.classes_[np.argmax(y_pred_proba, axis=1)]
             train_latency = train_end - train_start
             predict_latency = predict_end - predict_start
+            metrics = classification_metrics(y_test, y_pred_proba)
 
             rows.append(
                 {
                     "seed": seed,
                     "training_rows": context_size,
                     "accuracy": accuracy_score(y_test, y_pred),
-                    "roc_auc": roc_auc_score(y_test, y_pred_proba[:, 1]),
-                    "log_loss": log_loss(y_test, y_pred_proba),
+                    "roc_auc": metrics["roc_auc"],
+                    "log_loss": metrics["log_loss"],
                     "train_latency_seconds": train_latency,
                     "predict_latency_seconds": predict_latency,
                     "end_to_end_latency_seconds": train_latency + predict_latency,
