@@ -41,7 +41,10 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, log_loss, roc_auc_score
 from sklearn.model_selection import train_test_split
 
-from dataset import TASKS, load_openml_data
+from src.dataset import TASKS, load_openml_data
+from src.metrics import normalize_probabilities
+from src.utils import get_ranked_features, get_task_config
+from src.utils import load_or_create_feature_summary
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -59,12 +62,6 @@ def parse_args() -> argparse.Namespace:
         "--dataset",
         default="credit-g",
         help="Classification dataset name from dataset.py TASKS.",
-    )
-    parser.add_argument(
-        "--train-size",
-        type=int,
-        default=800,
-        help="Number of credit-g rows used to fit TabPFN.",
     )
     parser.add_argument(
         "--test-size",
@@ -104,21 +101,6 @@ def parse_args() -> argparse.Namespace:
         help="Top-k SHAP-ranked feature counts to evaluate.",
     )
     return parser.parse_args()
-
-
-def get_task_config(dataset_name: str) -> dict[str, Any]:
-    for task_config in TASKS:
-        if task_config["name"] == dataset_name:
-            if task_config["kind"] != "classification":
-                raise ValueError(f"{dataset_name!r} is not a classification dataset.")
-            return task_config
-
-    available = ", ".join(
-        task["name"] for task in TASKS if task["kind"] == "classification"
-    )
-    raise ValueError(
-        f"Unknown classification dataset {dataset_name!r}. Available: {available}"
-    )
 
 
 def compute_shap_explanation(
@@ -171,133 +153,6 @@ def build_tabpfn_classifier():
         ) from exc
 
     return TabPFNClassifier(fit_mode="fit_with_cache")
-
-
-def normalize_probabilities(y_pred_proba: np.ndarray) -> np.ndarray:
-    y_pred_proba = np.clip(y_pred_proba, 1e-15, 1.0)
-    return y_pred_proba / y_pred_proba.sum(axis=1, keepdims=True)
-
-
-def build_per_feature_values(
-    explanation,
-    X_explain: pd.DataFrame,
-    y_explain: pd.Series,
-    feature_names: list[str],
-) -> pd.DataFrame:
-    shap_values = np.asarray(explanation.values, dtype=float)
-    if shap_values.ndim != 2:
-        raise ValueError(f"Expected a 2D SHAP matrix, got shape {shap_values.shape}.")
-
-    rows = []
-    for explained_position, original_index in enumerate(X_explain.index):
-        for feature_position, feature_name in enumerate(feature_names):
-            rows.append(
-                {
-                    "explained_position": explained_position,
-                    "row_index": original_index,
-                    "target": y_explain.iloc[explained_position],
-                    "feature_index": feature_position,
-                    "feature_name": feature_name,
-                    "feature_value": X_explain.iloc[explained_position, feature_position],
-                    "shap_value": shap_values[explained_position, feature_position],
-                }
-            )
-
-    return pd.DataFrame(rows)
-
-
-def summarize_feature_values(per_feature_values: pd.DataFrame) -> pd.DataFrame:
-    return (
-        per_feature_values.groupby(["feature_index", "feature_name"], as_index=False)
-        .agg(
-            mean_shap_value=("shap_value", "mean"),
-            mean_abs_shap_value=("shap_value", lambda values: values.abs().mean()),
-            std_shap_value=("shap_value", "std"),
-            min_shap_value=("shap_value", "min"),
-            max_shap_value=("shap_value", "max"),
-        )
-        .fillna(0)
-        .sort_values("mean_abs_shap_value", ascending=False)
-    )
-
-
-def configure_matplotlib_cache() -> None:
-    cache_dir = Path(os.environ.get("TMPDIR", "/tmp")) / "tabpfn_matplotlib_cache"
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    os.environ.setdefault("MPLCONFIGDIR", str(cache_dir))
-    os.environ.setdefault("XDG_CACHE_HOME", str(cache_dir))
-
-
-def save_shap_bar_plot(explanation, output_dir: Path) -> Path | None:
-    configure_matplotlib_cache()
-
-    try:
-        import matplotlib
-
-        matplotlib.use("Agg", force=True)
-        import matplotlib.pyplot as plt
-        import shap
-    except ImportError:
-        return None
-
-    shap.plots.bar(explanation, show=False)
-    plot_path = output_dir / "shap_feature_bar.png"
-    plt.gcf().savefig(plot_path, dpi=200, bbox_inches="tight")
-    plt.close()
-    return plot_path
-
-
-def load_or_create_feature_summary(
-    summary_csv: Path,
-    X_train: pd.DataFrame,
-    y_train: pd.Series,
-    X_explain: pd.DataFrame,
-    y_explain: pd.Series,
-    feature_names: list[str],
-    budget: int,
-    output_dir: Path,
-) -> pd.DataFrame:
-    if summary_csv.exists():
-        print(f"Using existing SHAP feature summary from {summary_csv}")
-        return pd.read_csv(summary_csv)
-
-    print(f"Computing Shapley values for {len(X_explain)} credit-g rows...")
-    explanation = compute_shap_explanation(
-        X_train=X_train,
-        y_train=y_train,
-        X_explain=X_explain,
-        feature_names=feature_names,
-        budget=budget,
-    )
-    per_feature_values = build_per_feature_values(
-        explanation=explanation,
-        X_explain=X_explain,
-        y_explain=y_explain,
-        feature_names=feature_names,
-    )
-    feature_summary = summarize_feature_values(per_feature_values)
-    feature_summary.to_csv(summary_csv, index=False)
-    plot_path = save_shap_bar_plot(explanation, output_dir)
-
-    print(f"Wrote aggregate feature summary to {summary_csv}")
-    if plot_path is not None:
-        print(f"Wrote SHAP bar plot to {plot_path}")
-
-    return feature_summary
-
-
-def get_ranked_features(feature_summary: pd.DataFrame) -> pd.DataFrame:
-    required_columns = {"feature_name", "mean_abs_shap_value"}
-    missing_columns = required_columns - set(feature_summary.columns)
-    if missing_columns:
-        raise ValueError(
-            "SHAP feature summary is missing required columns: "
-            f"{sorted(missing_columns)}"
-        )
-
-    return feature_summary.sort_values("mean_abs_shap_value", ascending=False).reset_index(
-        drop=True
-    )
 
 
 def run_feature_count_experiment(
@@ -409,7 +264,6 @@ def run_feature_count_experiment(
 
 
 def plot_feature_performance(results: pd.DataFrame, output_dir: Path) -> list[Path]:
-    configure_matplotlib_cache()
 
     import matplotlib
 
@@ -505,19 +359,23 @@ def plot_feature_performance(results: pd.DataFrame, output_dir: Path) -> list[Pa
 def main() -> None:
     args = parse_args()
 
-    task_config = get_task_config(args.dataset)
-    X, y, _ = load_openml_data(task_config)
+    task_config = get_task_config(TASKS, args.dataset, kind="classification")
+    X, y  = load_openml_data(task_config)
     feature_names = X.columns.astype(str).tolist()
 
-    X_train, X_test, y_train, y_test = train_test_split(
+    X_train_pool, X_test, y_train_pool, y_test = train_test_split(
         X,
         y,
-        train_size=args.train_size,
         test_size=args.test_size,
         random_state=args.random_state,
     )
-    X_explain = X_test.iloc[: args.n_explain]
-    y_explain = y_test.iloc[: args.n_explain]
+
+    X_train, X_explain, y_train, y_explain = train_test_split(
+        X_train_pool,
+        y_train_pool,
+        test_size=args.n_explain,
+        random_state=args.random_state,
+    )
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     summary_csv = args.output_dir / "shap_feature_summary.csv"
@@ -532,6 +390,8 @@ def main() -> None:
         feature_names=feature_names,
         budget=args.budget,
         output_dir=args.output_dir,
+        compute_shap_explanation=compute_shap_explanation,
+        log_message=f"Computing Shapley values for {len(X_explain)} credit-g rows...",
     )
     ranked_features = get_ranked_features(feature_summary)
     performance_results = run_feature_count_experiment(

@@ -117,15 +117,8 @@ def load_openml_task(task_id: int) -> tuple[pd.DataFrame, pd.Series, dict[str, A
     configure_openml_cache()
     task = openml.tasks.get_task(task_id)
     X, y = task.get_X_and_y(dataset_format="dataframe")
-    dataset = task.get_dataset()
 
-    metadata = {
-        "openml_task_id": task_id,
-        "openml_dataset_id": task.dataset_id,
-        "openml_dataset_name": dataset.name,
-        "target_name": task.target_name,
-    }
-    return X, pd.Series(y, name=task.target_name), metadata
+    return X, pd.Series(y, name=task.target_name)
 
 
 def load_openml_dataset(
@@ -138,12 +131,7 @@ def load_openml_dataset(
     dataset = openml.datasets.get_dataset(dataset_id)
     X, y, _, _ = dataset.get_data(dataset_format="dataframe", target=target)
 
-    metadata = {
-        "openml_dataset_id": dataset_id,
-        "openml_dataset_name": dataset.name,
-        "target_name": target,
-    }
-    return X, pd.Series(y, name=target), metadata
+    return X, pd.Series(y, name=target)
 
 
 def load_openml_data(
